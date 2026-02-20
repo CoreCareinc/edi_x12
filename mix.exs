@@ -8,7 +8,7 @@ defmodule EdiX12.MixProject do
     [
       app: :edi_x12,
       version: @version,
-      elixir: "~> 1.15",
+      elixir: "~> 1.19",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
