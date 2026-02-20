@@ -180,10 +180,6 @@ defmodule Edi.X12.Parser do
     end
   end
 
-  def composite(values) do
-    values
-  end
-
   def decimal(values) do
     value = Enum.join(values)
     {float, ""} = Float.parse(value)
