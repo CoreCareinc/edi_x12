@@ -187,6 +187,7 @@ defmodule Edi.X12.Parser do
     float
   end
 
+  def decimal2("." <> rest), do: decimal2("0.#{rest}")
   def decimal2(value) when is_binary(value) and value != "" do
     {float, ""} = Float.parse(value)
 
