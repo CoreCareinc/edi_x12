@@ -75,6 +75,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :eligibility_or_benefit_information_code %>
   @file_path Application.app_dir(
                :edi_x12,
@@ -126,7 +128,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
   # Load the values for the values for :yes_no_condition_or_response_code_1 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code.json"
+               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code_1.json"
              )
   @external_resource @file_path
   @yes_no_condition_or_response_code_1_values @file_path |> File.read!() |> Jason.decode!()
@@ -134,7 +136,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
   # Load the values for the values for :yes_no_condition_or_response_code_2 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code.json"
+               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code_2.json"
              )
   @external_resource @file_path
   @yes_no_condition_or_response_code_2_values @file_path |> File.read!() |> Jason.decode!()
@@ -171,11 +173,13 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
     # Parse element (1365 - Service Type Code) and tag as: :service_type_code
     |> optional(
       ignore(string(@element_seperator))
-      |> unwrap_and_tag(
-        map(
-          ascii_string([?0..?9, ?A..?Z, ?|], min: 0, max: 296),
-          {Parser, :identifier, [@service_type_code_values]}
-        ),
+      |> tag(
+        times(
+          optional(ignore(string(@repetition_seperator)))
+          |> map(
+            ascii_string([?0..?9, ?A..?Z, ?|], min: 0, max: 296),
+            {Parser, :identifier, [@service_type_code_values]}
+          ), min: 1, max: 99),
         :service_type_code
       )
     )
@@ -280,7 +284,12 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(
+            parsec({Edi.X12.Hipaa.R5010.Elements.CompositeMedicalProcedureIdentifier, :element})
+          ),
+          {Edi.X12.Hipaa.R5010.Elements.CompositeMedicalProcedureIdentifier, :parse!, []}
+        ),
         :composite_medical_procedure_identifier
       )
     )
@@ -289,7 +298,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.CompositeDiagnosisCodePointer, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.CompositeDiagnosisCodePointer, :parse!, []}
+        ),
         :composite_diagnosis_code_pointer
       )
     )

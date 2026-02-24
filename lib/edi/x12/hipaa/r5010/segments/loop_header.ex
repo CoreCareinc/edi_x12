@@ -33,6 +33,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.LoopHeader do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   ## Nimble Parsec
 
   combinator =
