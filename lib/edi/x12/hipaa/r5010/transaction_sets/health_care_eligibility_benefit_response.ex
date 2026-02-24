@@ -677,10 +677,7 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
 
   @spec parse(binary()) :: {:ok, t()}
   def parse(value) when is_binary(value) do
-    value
-    |> sanitize()
-    |> transaction_set()
-    |> case do
+    case transaction_set(value) do
       {:ok, result, _rest, _, _, _} ->
         {:ok, result}
 
@@ -795,12 +792,5 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
 
   def parse_segment(<<"TRN", _::binary>> = segment) do
     Segments.Trace.parse(segment)
-  end
-
-  ## Private functions
-
-  defp sanitize(edi) do
-    edi
-    |> String.replace("|", ":")
   end
 end
