@@ -43,9 +43,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
     |> ignore(optional(string("\n")))
 
     # Loop 2000A
-    |> wrap(
-      # Parse the segment HL - Hierarchical Level
-      times(
+    |> times(
+      wrap(
+        # Parse the segment HL - Hierarchical Level
         map(
           wrap(parsec({Segments.HierarchicalLevel, :segment})),
           {Segments.HierarchicalLevel, :parse!, []}
@@ -58,7 +58,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
             wrap(parsec({Segments.RequestValidation, :segment})),
             {Segments.RequestValidation, :parse!, []}
           )
-          |> ignore(optional(string("\n"))), min: 0, max: 9)
+          |> ignore(optional(string("\n"))),
+          min: 0,
+          max: 9
+        )
 
         # Loop 2100A
         |> wrap(
@@ -75,7 +78,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
               wrap(parsec({Segments.AdministrativeCommunicationsContact, :segment})),
               {Segments.AdministrativeCommunicationsContact, :parse!, []}
             )
-            |> ignore(optional(string("\n"))), min: 0, max: 3)
+            |> ignore(optional(string("\n"))),
+            min: 0,
+            max: 3
+          )
 
           # Parse the segment AAA - Request Validation
           |> times(
@@ -83,13 +89,16 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
               wrap(parsec({Segments.RequestValidation, :segment})),
               {Segments.RequestValidation, :parse!, []}
             )
-            |> ignore(optional(string("\n"))), min: 0, max: 9)
+            |> ignore(optional(string("\n"))),
+            min: 0,
+            max: 9
+          )
         )
 
         # Loop 2000B
-        |> wrap(
-          # Parse the segment HL - Hierarchical Level
-          times(
+        |> times(
+          wrap(
+            # Parse the segment HL - Hierarchical Level
             map(
               wrap(parsec({Segments.HierarchicalLevel, :segment})),
               {Segments.HierarchicalLevel, :parse!, []}
@@ -111,7 +120,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                   wrap(parsec({Segments.ReferenceInformation, :segment})),
                   {Segments.ReferenceInformation, :parse!, []}
                 )
-                |> ignore(optional(string("\n"))), min: 0, max: 9)
+                |> ignore(optional(string("\n"))),
+                min: 0,
+                max: 9
+              )
 
               # Parse the segment N3 - Party Location
               |> optional(
@@ -137,7 +149,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                   wrap(parsec({Segments.RequestValidation, :segment})),
                   {Segments.RequestValidation, :parse!, []}
                 )
-                |> ignore(optional(string("\n"))), min: 0, max: 9)
+                |> ignore(optional(string("\n"))),
+                min: 0,
+                max: 9
+              )
 
               # Parse the segment PRV - Provider Information
               |> optional(
@@ -150,9 +165,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
             )
 
             # Loop 2000C
-            |> wrap(
-              # Parse the segment HL - Hierarchical Level
-              times(
+            |> times(
+              wrap(
+                # Parse the segment HL - Hierarchical Level
                 map(
                   wrap(parsec({Segments.HierarchicalLevel, :segment})),
                   {Segments.HierarchicalLevel, :parse!, []}
@@ -165,7 +180,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                     wrap(parsec({Segments.Trace, :segment})),
                     {Segments.Trace, :parse!, []}
                   )
-                  |> ignore(optional(string("\n"))), min: 0, max: 3)
+                  |> ignore(optional(string("\n"))),
+                  min: 0,
+                  max: 3
+                )
 
                 # Loop 2100C
                 |> wrap(
@@ -182,7 +200,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                       wrap(parsec({Segments.ReferenceInformation, :segment})),
                       {Segments.ReferenceInformation, :parse!, []}
                     )
-                    |> ignore(optional(string("\n"))), min: 0, max: 9)
+                    |> ignore(optional(string("\n"))),
+                    min: 0,
+                    max: 9
+                  )
 
                   # Parse the segment N3 - Party Location
                   |> optional(
@@ -208,7 +229,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                       wrap(parsec({Segments.RequestValidation, :segment})),
                       {Segments.RequestValidation, :parse!, []}
                     )
-                    |> ignore(optional(string("\n"))), min: 0, max: 9)
+                    |> ignore(optional(string("\n"))),
+                    min: 0,
+                    max: 9
+                  )
 
                   # Parse the segment PRV - Provider Information
                   |> optional(
@@ -252,7 +276,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                       wrap(parsec({Segments.DateOrTimeOrPeriod, :segment})),
                       {Segments.DateOrTimeOrPeriod, :parse!, []}
                     )
-                    |> ignore(optional(string("\n"))), min: 0, max: 9)
+                    |> ignore(optional(string("\n"))),
+                    min: 0,
+                    max: 9
+                  )
 
                   # Parse the segment MPI - Military Personnel Information
                   |> optional(
@@ -264,9 +291,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                   )
 
                   # Loop 2110C
-                  |> wrap(
-                    # Parse the segment EB - Eligibility or Benefit Information
-                    times(
+                  |> times(
+                    wrap(
+                      # Parse the segment EB - Eligibility or Benefit Information
                       map(
                         wrap(parsec({Segments.EligibilityOrBenefitInformation, :segment})),
                         {Segments.EligibilityOrBenefitInformation, :parse!, []}
@@ -279,7 +306,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.HealthCareServicesDelivery, :segment})),
                           {Segments.HealthCareServicesDelivery, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment REF - Reference Information
                       |> times(
@@ -287,7 +317,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.ReferenceInformation, :segment})),
                           {Segments.ReferenceInformation, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment DTP - Date or Time or Period
                       |> times(
@@ -295,7 +328,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.DateOrTimeOrPeriod, :segment})),
                           {Segments.DateOrTimeOrPeriod, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 20)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 20
+                      )
 
                       # Parse the segment AAA - Request Validation
                       |> times(
@@ -303,7 +339,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.RequestValidation, :segment})),
                           {Segments.RequestValidation, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment MSG - Message Text
                       |> times(
@@ -311,17 +350,23 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.MessageText, :segment})),
                           {Segments.MessageText, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 10)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 10
+                      )
 
                       # Loop 2115C
-                      |> wrap(
-                        # Parse the segment III - Information
-                        times(
+                      |> times(
+                        wrap(
+                          # Parse the segment III - Information
                           map(
                             wrap(parsec({Segments.Information, :segment})),
                             {Segments.Information, :parse!, []}
                           )
-                          |> ignore(optional(string("\n"))), min: 0, max: 10)
+                          |> ignore(optional(string("\n")))
+                        ),
+                        min: 0,
+                        max: 10
                       )
 
                       # Parse the segment LS - Loop Header
@@ -334,9 +379,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                       )
 
                       # Loop 2120C
-                      |> wrap(
-                        # Parse the segment NM1 - Individual or Organizational Name
-                        times(
+                      |> times(
+                        wrap(
+                          # Parse the segment NM1 - Individual or Organizational Name
                           map(
                             wrap(parsec({Segments.IndividualOrOrganizationalName, :segment})),
                             {Segments.IndividualOrOrganizationalName, :parse!, []}
@@ -369,7 +414,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               ),
                               {Segments.AdministrativeCommunicationsContact, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 3)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 3
+                          )
 
                           # Parse the segment PRV - Provider Information
                           |> optional(
@@ -378,7 +426,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               {Segments.ProviderInformation, :parse!, []}
                             )
                             |> ignore(optional(string("\n")))
-                          ), min: 0, max: 23)
+                          )
+                        ),
+                        min: 0,
+                        max: 23
                       )
 
                       # Parse the segment LE - Loop Trailer
@@ -388,16 +439,16 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           {Segments.LoopTrailer, :parse!, []}
                         )
                         |> ignore(optional(string("\n")))
-                      ),
-                      min: 0
-                    )
+                      )
+                    ),
+                    min: 0
                   )
                 )
 
                 # Loop 2000D
-                |> wrap(
-                  # Parse the segment HL - Hierarchical Level
-                  times(
+                |> times(
+                  wrap(
+                    # Parse the segment HL - Hierarchical Level
                     map(
                       wrap(parsec({Segments.HierarchicalLevel, :segment})),
                       {Segments.HierarchicalLevel, :parse!, []}
@@ -410,7 +461,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                         wrap(parsec({Segments.Trace, :segment})),
                         {Segments.Trace, :parse!, []}
                       )
-                      |> ignore(optional(string("\n"))), min: 0, max: 3)
+                      |> ignore(optional(string("\n"))),
+                      min: 0,
+                      max: 3
+                    )
 
                     # Loop 2100D
                     |> wrap(
@@ -427,7 +481,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.ReferenceInformation, :segment})),
                           {Segments.ReferenceInformation, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment N3 - Party Location
                       |> optional(
@@ -453,7 +510,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.RequestValidation, :segment})),
                           {Segments.RequestValidation, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment PRV - Provider Information
                       |> optional(
@@ -497,7 +557,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           wrap(parsec({Segments.DateOrTimeOrPeriod, :segment})),
                           {Segments.DateOrTimeOrPeriod, :parse!, []}
                         )
-                        |> ignore(optional(string("\n"))), min: 0, max: 9)
+                        |> ignore(optional(string("\n"))),
+                        min: 0,
+                        max: 9
+                      )
 
                       # Parse the segment MPI - Military Personnel Information
                       |> optional(
@@ -509,9 +572,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                       )
 
                       # Loop 2110D
-                      |> wrap(
-                        # Parse the segment EB - Eligibility or Benefit Information
-                        times(
+                      |> times(
+                        wrap(
+                          # Parse the segment EB - Eligibility or Benefit Information
                           map(
                             wrap(parsec({Segments.EligibilityOrBenefitInformation, :segment})),
                             {Segments.EligibilityOrBenefitInformation, :parse!, []}
@@ -524,7 +587,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               wrap(parsec({Segments.HealthCareServicesDelivery, :segment})),
                               {Segments.HealthCareServicesDelivery, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 9)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 9
+                          )
 
                           # Parse the segment REF - Reference Information
                           |> times(
@@ -532,7 +598,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               wrap(parsec({Segments.ReferenceInformation, :segment})),
                               {Segments.ReferenceInformation, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 9)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 9
+                          )
 
                           # Parse the segment DTP - Date or Time or Period
                           |> times(
@@ -540,7 +609,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               wrap(parsec({Segments.DateOrTimeOrPeriod, :segment})),
                               {Segments.DateOrTimeOrPeriod, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 20)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 20
+                          )
 
                           # Parse the segment AAA - Request Validation
                           |> times(
@@ -548,7 +620,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               wrap(parsec({Segments.RequestValidation, :segment})),
                               {Segments.RequestValidation, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 9)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 9
+                          )
 
                           # Parse the segment MSG - Message Text
                           |> times(
@@ -556,17 +631,23 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               wrap(parsec({Segments.MessageText, :segment})),
                               {Segments.MessageText, :parse!, []}
                             )
-                            |> ignore(optional(string("\n"))), min: 0, max: 10)
+                            |> ignore(optional(string("\n"))),
+                            min: 0,
+                            max: 10
+                          )
 
                           # Loop 2115D
-                          |> wrap(
-                            # Parse the segment III - Information
-                            times(
+                          |> times(
+                            wrap(
+                              # Parse the segment III - Information
                               map(
                                 wrap(parsec({Segments.Information, :segment})),
                                 {Segments.Information, :parse!, []}
                               )
-                              |> ignore(optional(string("\n"))), min: 0, max: 10)
+                              |> ignore(optional(string("\n")))
+                            ),
+                            min: 0,
+                            max: 10
                           )
 
                           # Parse the segment LS - Loop Header
@@ -579,9 +660,9 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                           )
 
                           # Loop 2120D
-                          |> wrap(
-                            # Parse the segment NM1 - Individual or Organizational Name
-                            times(
+                          |> times(
+                            wrap(
+                              # Parse the segment NM1 - Individual or Organizational Name
                               map(
                                 wrap(parsec({Segments.IndividualOrOrganizationalName, :segment})),
                                 {Segments.IndividualOrOrganizationalName, :parse!, []}
@@ -616,7 +697,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                                   ),
                                   {Segments.AdministrativeCommunicationsContact, :parse!, []}
                                 )
-                                |> ignore(optional(string("\n"))), min: 0, max: 3)
+                                |> ignore(optional(string("\n"))),
+                                min: 0,
+                                max: 3
+                              )
 
                               # Parse the segment PRV - Provider Information
                               |> optional(
@@ -625,7 +709,10 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                                   {Segments.ProviderInformation, :parse!, []}
                                 )
                                 |> ignore(optional(string("\n")))
-                              ), min: 0, max: 23)
+                              )
+                            ),
+                            min: 0,
+                            max: 23
                           )
 
                           # Parse the segment LE - Loop Trailer
@@ -635,22 +722,22 @@ defmodule Edi.X12.Hipaa.R5010.TransactionSets.HealthCareEligibilityBenefitRespon
                               {Segments.LoopTrailer, :parse!, []}
                             )
                             |> ignore(optional(string("\n")))
-                          ),
-                          min: 0
-                        )
+                          )
+                        ),
+                        min: 0
                       )
-                    ),
-                    min: 0
-                  )
-                ),
-                min: 0
-              )
-            ),
-            min: 0
-          )
-        ),
-        min: 1
-      )
+                    )
+                  ),
+                  min: 0
+                )
+              ),
+              min: 0
+            )
+          ),
+          min: 0
+        )
+      ),
+      min: 1
     )
 
     # Parse the segment SE - Transaction Set Trailer

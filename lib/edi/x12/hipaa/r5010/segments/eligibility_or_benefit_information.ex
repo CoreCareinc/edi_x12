@@ -179,7 +179,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.EligibilityOrBenefitInformation do
           |> map(
             ascii_string([?0..?9, ?A..?Z, ?|], min: 0, max: 296),
             {Parser, :identifier, [@service_type_code_values]}
-          ), min: 1, max: 99),
+          ),
+          min: 1,
+          max: 99
+        ),
         :service_type_code
       )
     )
