@@ -1,6 +1,8 @@
 defmodule Edi.X12.Parser do
   @moduledoc false
 
+  alias Edi.X12.Hipaa.R5010.Segments.InterchangeControlHeader
+
   ## Public macros
 
   defmacro __using__(opts) do
@@ -70,6 +72,16 @@ defmodule Edi.X12.Parser do
   end
 
   ## Public functions
+
+  @spec extract_separators(binary()) :: {binary(), binary(), binary()}
+  def extract_separators(edi) do
+    {:ok, result, _, _, _, _} = InterchangeControlHeader.segment(edi)
+
+    repetition_separator = Keyword.get(result, :repetition_separator)
+    composite_separator = Keyword.get(result, :component_element_separator)
+
+    {repetition_separator, composite_separator}
+  end
 
   def date(<<year::binary-size(4), month::binary-size(2), day::binary-size(2)>>) do
     {year, ""} = Integer.parse(year)
@@ -180,16 +192,14 @@ defmodule Edi.X12.Parser do
     end
   end
 
-  def composite(values) do
-    values
-  end
-
   def decimal(values) do
     value = Enum.join(values)
     {float, ""} = Float.parse(value)
 
     float
   end
+
+  def decimal2("." <> rest), do: decimal2("0.#{rest}")
 
   def decimal2(value) when is_binary(value) and value != "" do
     {float, ""} = Float.parse(value)
