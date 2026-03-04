@@ -68,6 +68,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   ## Nimble Parsec
 
   combinator =
@@ -78,7 +80,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     # Parse element (C022 - Health Care Code Information) and tag as: :health_care_code_information_1
     |> ignore(string(@element_seperator))
     |> unwrap_and_tag(
-      map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+      map(
+        wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+        {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+      ),
       :health_care_code_information_1
     )
 
@@ -86,7 +91,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_2
       )
     )
@@ -95,7 +103,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_3
       )
     )
@@ -104,7 +115,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_4
       )
     )
@@ -113,7 +127,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_5
       )
     )
@@ -122,7 +139,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_6
       )
     )
@@ -131,7 +151,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_7
       )
     )
@@ -140,7 +163,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_8
       )
     )
@@ -149,7 +175,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_9
       )
     )
@@ -158,7 +187,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_10
       )
     )
@@ -167,7 +199,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_11
       )
     )
@@ -176,7 +211,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.HealthCareCodeInformation, :parse!, []}
+        ),
         :health_care_code_information_12
       )
     )

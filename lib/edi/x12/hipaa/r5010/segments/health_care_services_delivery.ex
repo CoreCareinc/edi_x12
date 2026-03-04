@@ -56,6 +56,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareServicesDelivery do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :quantity_qualifier %>
   @file_path Application.app_dir(
                :edi_x12,

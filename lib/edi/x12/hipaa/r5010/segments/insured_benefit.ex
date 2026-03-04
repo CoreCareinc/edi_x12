@@ -85,10 +85,12 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InsuredBenefit do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :yes_no_condition_or_response_code_1 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code.json"
+               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code_1.json"
              )
   @external_resource @file_path
   @yes_no_condition_or_response_code_1_values @file_path |> File.read!() |> Jason.decode!()
@@ -154,7 +156,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InsuredBenefit do
   # Load the values for the values for :yes_no_condition_or_response_code_2 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code.json"
+               "priv/element_values/hipaa/r5010/yes_no_condition_or_response_code_2.json"
              )
   @external_resource @file_path
   @yes_no_condition_or_response_code_2_values @file_path |> File.read!() |> Jason.decode!()
@@ -255,7 +257,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InsuredBenefit do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.MedicareStatusCode, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.MedicareStatusCode, :parse!, []}
+        ),
         :medicare_status_code
       )
     )

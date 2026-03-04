@@ -41,6 +41,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Trace do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :trace_type_code %>
   @file_path Application.app_dir(:edi_x12, "priv/element_values/hipaa/r5010/trace_type_code.json")
   @external_resource @file_path

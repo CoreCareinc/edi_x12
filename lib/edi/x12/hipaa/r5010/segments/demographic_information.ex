@@ -65,6 +65,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.DemographicInformation do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :date_time_period_format_qualifier %>
   @file_path Application.app_dir(
                :edi_x12,
@@ -171,7 +173,12 @@ defmodule Edi.X12.Hipaa.R5010.Segments.DemographicInformation do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(
+            parsec({Edi.X12.Hipaa.R5010.Elements.CompositeRaceOrEthnicityInformation, :element})
+          ),
+          {Edi.X12.Hipaa.R5010.Elements.CompositeRaceOrEthnicityInformation, :parse!, []}
+        ),
         :composite_race_or_ethnicity_information
       )
     )

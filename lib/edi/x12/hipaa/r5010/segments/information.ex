@@ -59,6 +59,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Information do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :code_list_qualifier_code %>
   @file_path Application.app_dir(
                :edi_x12,
@@ -75,7 +77,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Information do
   # Load the values for the values for :surface_layer_position_code_1 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/surface_layer_position_code.json"
+               "priv/element_values/hipaa/r5010/surface_layer_position_code_1.json"
              )
   @external_resource @file_path
   @surface_layer_position_code_1_values @file_path |> File.read!() |> Jason.decode!()
@@ -83,7 +85,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Information do
   # Load the values for the values for :surface_layer_position_code_2 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/surface_layer_position_code.json"
+               "priv/element_values/hipaa/r5010/surface_layer_position_code_2.json"
              )
   @external_resource @file_path
   @surface_layer_position_code_2_values @file_path |> File.read!() |> Jason.decode!()
@@ -91,7 +93,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Information do
   # Load the values for the values for :surface_layer_position_code_3 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/surface_layer_position_code.json"
+               "priv/element_values/hipaa/r5010/surface_layer_position_code_3.json"
              )
   @external_resource @file_path
   @surface_layer_position_code_3_values @file_path |> File.read!() |> Jason.decode!()
@@ -158,7 +160,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.Information do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.CompositeUnitOfMeasure, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.CompositeUnitOfMeasure, :parse!, []}
+        ),
         :composite_unit_of_measure
       )
     )

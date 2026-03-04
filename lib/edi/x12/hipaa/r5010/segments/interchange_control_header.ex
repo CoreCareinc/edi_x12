@@ -79,6 +79,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InterchangeControlHeader do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :authorization_information_qualifier %>
   @file_path Application.app_dir(
                :edi_x12,
@@ -98,7 +100,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InterchangeControlHeader do
   # Load the values for the values for :interchange_id_qualifier_1 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/interchange_id_qualifier.json"
+               "priv/element_values/hipaa/r5010/interchange_id_qualifier_1.json"
              )
   @external_resource @file_path
   @interchange_id_qualifier_1_values @file_path |> File.read!() |> Jason.decode!()
@@ -106,7 +108,7 @@ defmodule Edi.X12.Hipaa.R5010.Segments.InterchangeControlHeader do
   # Load the values for the values for :interchange_id_qualifier_2 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/interchange_id_qualifier.json"
+               "priv/element_values/hipaa/r5010/interchange_id_qualifier_2.json"
              )
   @external_resource @file_path
   @interchange_id_qualifier_2_values @file_path |> File.read!() |> Jason.decode!()
