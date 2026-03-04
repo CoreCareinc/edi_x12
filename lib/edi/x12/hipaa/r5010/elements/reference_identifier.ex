@@ -53,7 +53,7 @@ defmodule Edi.X12.Hipaa.R5010.Elements.ReferenceIdentifier do
   # Load the values for the values for :reference_identification_qualifier_1 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/reference_identification_qualifier.json"
+               "priv/element_values/hipaa/r5010/reference_identification_qualifier_1.json"
              )
   @external_resource @file_path
   @reference_identification_qualifier_1_values @file_path |> File.read!() |> Jason.decode!()
@@ -61,7 +61,7 @@ defmodule Edi.X12.Hipaa.R5010.Elements.ReferenceIdentifier do
   # Load the values for the values for :reference_identification_qualifier_2 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/reference_identification_qualifier.json"
+               "priv/element_values/hipaa/r5010/reference_identification_qualifier_2.json"
              )
   @external_resource @file_path
   @reference_identification_qualifier_2_values @file_path |> File.read!() |> Jason.decode!()
@@ -69,7 +69,7 @@ defmodule Edi.X12.Hipaa.R5010.Elements.ReferenceIdentifier do
   # Load the values for the values for :reference_identification_qualifier_3 %>
   @file_path Application.app_dir(
                :edi_x12,
-               "priv/element_values/hipaa/r5010/reference_identification_qualifier.json"
+               "priv/element_values/hipaa/r5010/reference_identification_qualifier_3.json"
              )
   @external_resource @file_path
   @reference_identification_qualifier_3_values @file_path |> File.read!() |> Jason.decode!()

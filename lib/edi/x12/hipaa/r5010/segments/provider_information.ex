@@ -51,6 +51,8 @@ defmodule Edi.X12.Hipaa.R5010.Segments.ProviderInformation do
 
   @segment_terminator "~"
 
+  @repetition_seperator "^"
+
   # Load the values for the values for :provider_code %>
   @file_path Application.app_dir(:edi_x12, "priv/element_values/hipaa/r5010/provider_code.json")
   @external_resource @file_path
@@ -134,7 +136,10 @@ defmodule Edi.X12.Hipaa.R5010.Segments.ProviderInformation do
     |> optional(
       ignore(string(@element_seperator))
       |> unwrap_and_tag(
-        map(ascii_string([not: ?*, not: ?~], min: 1), {Parser, :composite, []}),
+        map(
+          wrap(parsec({Edi.X12.Hipaa.R5010.Elements.ProviderSpecialtyInformation, :element})),
+          {Edi.X12.Hipaa.R5010.Elements.ProviderSpecialtyInformation, :parse!, []}
+        ),
         :provider_specialty_information
       )
     )
