@@ -69,8 +69,6 @@ defmodule Edi.X12.Hipaa.R5010.Segments.IndividualOrOrganizationalName do
 
   @segment_terminator "~"
 
-  @repetition_seperator "^"
-
   # Load the values for the values for :entity_identifier_code_1 %>
   @file_path Application.app_dir(
                :edi_x12,

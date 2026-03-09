@@ -41,8 +41,6 @@ defmodule Edi.X12.Hipaa.R5010.Segments.RequestValidation do
 
   @segment_terminator "~"
 
-  @repetition_seperator "^"
-
   # Load the values for the values for :yes_no_condition_or_response_code %>
   @file_path Application.app_dir(
                :edi_x12,
