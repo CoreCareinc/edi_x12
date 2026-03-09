@@ -53,8 +53,6 @@ defmodule Edi.X12.Hipaa.R5010.Segments.GeographicLocation do
 
   @segment_terminator "~"
 
-  @repetition_seperator "^"
-
   # Load the values for the values for :state_or_province_code %>
   @file_path Application.app_dir(
                :edi_x12,

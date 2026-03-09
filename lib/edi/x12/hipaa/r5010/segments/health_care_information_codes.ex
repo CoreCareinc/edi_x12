@@ -68,8 +68,6 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
 
   @segment_terminator "~"
 
-  @repetition_seperator "^"
-
   ## Nimble Parsec
 
   combinator =
