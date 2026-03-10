@@ -9,8 +9,6 @@ defmodule Edi.X12.Hipaa.R5010.Segments.HealthCareInformationCodes do
 
   import NimbleParsec
 
-  alias Edi.X12.Parser
-
   ## Strucuture
 
   @derive {Inspect,
