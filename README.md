@@ -18,14 +18,14 @@ EDI X12 is the standard format for electronic business documents in North Americ
 > This library is **not production-ready** yet. Use at your own risk.
 
 > [!CAUTION]
-> **Do not submit pull requests.** Open a [new issue](https://github.com/GRoguelon/edi_x12/issues/new/choose) for any related issues.
+> **Do not submit pull requests.** Open a [new issue](https://github.com/CoreCareinc/edi_x12/issues/new/choose) for any related issues.
 
 ## Installation
 
 ```elixir
 def deps do
   [
-    {:edi_x12, "~> 0.1.4"}
+    {:edi_x12, "~> 0.1.5"}
   ]
 end
 ```

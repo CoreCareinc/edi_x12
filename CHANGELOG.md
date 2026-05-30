@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.5 (2026-05-30)
+
+### Bug fixes
+
+* Fixed various bugs on the parser
+* Updated dependencies
+
 ## v0.1.4 (2025-10-03)
 
 ### Bug fixes

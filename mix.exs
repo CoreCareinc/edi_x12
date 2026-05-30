@@ -1,8 +1,8 @@
 defmodule EdiX12.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/GRoguelon/edi_x12"
-  @version "0.1.4"
+  @source_url "https://github.com/CoreCareinc/edi_x12"
+  @version "0.1.5"
 
   def project do
     [
