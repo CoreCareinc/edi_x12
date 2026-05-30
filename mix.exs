@@ -107,7 +107,7 @@ defmodule EdiX12.MixProject do
   defp deps do
     [
       {:jason, "~> 1.4"},
-      {:nimble_parsec, "~> 1.4"},
+      {:nimble_parsec, "~> 1.4", runtime: false},
 
       ## Dev dependencies
       {:ex_doc, "~> 0.38", only: :dev, runtime: false},
